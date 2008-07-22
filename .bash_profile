@@ -1,5 +1,5 @@
 #export PS1=">"
-export PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
+export PS1='[\W$(__git_ps1 " (%s)")]\$ '
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 export MANPAGER="col -b | view -c 'set ft=man nomod nolist' -" 
 alias bt=/Users/i_gouss/local/git-issues/git-issues
