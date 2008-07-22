@@ -32,3 +32,4 @@ ruby -e'include Math;(-7..30).each{|y|s="";\
 (26..100).each{|x|s<<" .,:+*%xX08@"[ \
 ((sin(x/8.0)+2+sin(y*x/2.0))**       \
 (sin(y/7.0)+1)*12/16.0)]};puts s}'
+alias
