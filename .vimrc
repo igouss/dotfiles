@@ -22,6 +22,7 @@ set hlsearch
 set statusline=[%l,%c\ %P%M]\ %f\ %r%h%w
 set title 
 set icon
+set autoread
 
 " Folding
 set foldenable

@@ -5,9 +5,12 @@ alias bt=/Users/i_gouss/local/git-issues/git-issues
 #alias console=script/console
 #alias generate=script/generate
 alias commit="git commit -a -m"
+alias commiti="git commit --interactive"
 alias status="git status -u"
-alias gdif="git diff"
-alias gdiff="git diff --cached"
+alias giff="git diff"
+alias giffc="git diff --cached"
+alias add="git add ."
+alias addp="git add --patch"
 set -o vi
 export CLICOLOR=1
 export JAVA_HOME=/Library/Java/Home
