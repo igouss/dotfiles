@@ -10,7 +10,9 @@ export JAVA_HOME=/Library/Java/Home
 export LESS=-RX
 alias gem-server="gem server --daemon"
 alias netstat="netstat -nal -p tcp && netstat -nal -p udp"
+
 export GRAILS_HOME=~/local/grails
+export PATH=$GRAILS_HOME/bin:$PATH
 
 #run "sudo visudo" and add the line
 #Defaults        env_keep += "JAVA_HOME"
