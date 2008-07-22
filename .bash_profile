@@ -4,13 +4,14 @@ export MANPAGER="col -b | view -c 'set ft=man nomod nolist' -"
 alias bt=/Users/i_gouss/local/git-issues/git-issues
 #alias console=script/console
 #alias generate=script/generate
-alias commit="git commit -a -m"
-alias commiti="git commit --interactive"
+alias ci="git commit -a -m"
+alias cii="git commit --interactive"
 alias status="git status -u"
 alias giff="git diff"
 alias giffc="git diff --cached"
 alias add="git add ."
 alias addp="git add --patch"
+alias push?='git cherry -v origin/master'
 set -o vi
 export CLICOLOR=1
 export JAVA_HOME=/Library/Java/Home
