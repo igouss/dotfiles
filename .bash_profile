@@ -13,6 +13,8 @@ alias dfir="git diff --cached"
 alias add="git add ."
 alias addp="git add --patch"
 alias push?='git cherry -v origin/master'
+alias pull="git pull --rebase"
+
 set -o vi
 export CLICOLOR=1
 export JAVA_HOME=/Library/Java/Home
