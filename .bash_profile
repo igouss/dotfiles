@@ -1,9 +1,10 @@
 export PS1=">"
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 alias bt=/Users/i_gouss/local/git-issues/git-issues
-alias console=script/console
-alias generate=script/generate
+#alias console=script/console
+#alias generate=script/generate
 alias commit="git commit -a -m"
+alias status="git status -u"
 set -o vi
 export CLICOLOR=1
 export JAVA_HOME=/Library/Java/Home
