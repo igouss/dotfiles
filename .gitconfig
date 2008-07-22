@@ -8,3 +8,5 @@
 	email = i.gouss@gmail.com
 [pack]
 	threads = 0
+[diff]
+    renames = true
