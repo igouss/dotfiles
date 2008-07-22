@@ -40,6 +40,7 @@ set shiftwidth=4
 set expandtab
 autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 autocmd BufNewFile,BufRead *.rhtml setlocal ft=eruby
+autocmd BufNewFile,BufRead COMMIT_EDITMSG set filetype=gitcommit
 
 let g:explHideFiles='^\.,.*\.sw[po]$,.*\.log$'
 let g:explDetailedHelp=0
