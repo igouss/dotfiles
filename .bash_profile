@@ -8,6 +8,9 @@ set -o vi
 export CLICOLOR=1
 export JAVA_HOME=/Library/Java/Home
 export LESS=-RX
+alias gem-server="gem server --daemon"
+alias netstat="netstat -nal -p tcp && netstat -nal -p udp"
+export GRAILS_HOME=~/local/grails
 
 #run "sudo visudo" and add the line
 #Defaults        env_keep += "JAVA_HOME"

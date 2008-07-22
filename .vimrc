@@ -8,7 +8,8 @@ set history=50
 
 " Visual
 syntax on
-colorscheme delek
+"colorscheme delek
+colorscheme clarity
 set ruler
 set showcmd
 set cmdheight=2
