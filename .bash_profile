@@ -20,7 +20,7 @@ alias pull="git pull --rebase"
 set -o vi
 export CLICOLOR=1
 export JAVA_HOME=/Library/Java/Home
-export LESS=-RX
+#export LESS=-RX
 alias gem-server="gem server --daemon"
 alias netstat="netstat -nal -p tcp && netstat -nal -p udp"
 
