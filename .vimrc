@@ -14,7 +14,7 @@ set ruler
 set showcmd
 set cmdheight=2
 set laststatus=2
-set number
+"set number
 set showmatch
 set showmode
 set cursorline
@@ -32,6 +32,8 @@ set foldmethod=indent
 filetype on
 filetype plugin on
 filetype plugin indent on
+runtime ftplugin/man.vim 
+
 set tabstop=4
 set shiftwidth=4
 set expandtab

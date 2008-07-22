@@ -1,10 +1,13 @@
 export PS1=">"
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+export MANPAGER="col -b | view -c 'set ft=man nomod nolist' -" 
 alias bt=/Users/i_gouss/local/git-issues/git-issues
 #alias console=script/console
 #alias generate=script/generate
 alias commit="git commit -a -m"
 alias status="git status -u"
+alias gdif="git diff"
+alias gdiff="git diff --cached"
 set -o vi
 export CLICOLOR=1
 export JAVA_HOME=/Library/Java/Home
