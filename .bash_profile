@@ -2,9 +2,13 @@
 export PS1='[\W$(__git_ps1 " (%s)")]\$ '
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 export MANPAGER="col -b | view -c 'set ft=man nomod nolist' -" 
-alias bt=/Users/i_gouss/local/git-issues/git-issues
-#alias console=script/console
-#alias generate=script/generate
+export CLICOLOR=1
+export JAVA_HOME=/Library/Java/Home
+export GRAILS_HOME=~/local/grails
+export PATH=$GRAILS_HOME/bin:$PATH
+#export LESS=-RX
+
+alias gem-server="gem server --daemon"
 alias ci="git commit -a -m"
 alias cii="git commit --interactive"
 alias st="git status -u"
@@ -16,20 +20,13 @@ alias add="git add ."
 alias addp="git add --patch"
 alias push?='git cherry -v origin/master'
 alias pull="git pull --rebase"
-
-set -o vi
-export CLICOLOR=1
-export JAVA_HOME=/Library/Java/Home
-#export LESS=-RX
-alias gem-server="gem server --daemon"
+alias tag="git tag -a"
 alias netstat="netstat -nal -p tcp && netstat -nal -p udp"
 
-export GRAILS_HOME=~/local/grails
-export PATH=$GRAILS_HOME/bin:$PATH
+set -o vi
 
 #run "sudo visudo" and add the line
 #Defaults        env_keep += "JAVA_HOME"
-
 
 if [ -f /opt/local/etc/bash_completion ]; then
 	. /opt/local/etc/bash_completion
