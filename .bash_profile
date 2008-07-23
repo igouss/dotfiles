@@ -6,6 +6,8 @@ export CLICOLOR=1
 export JAVA_HOME=/Library/Java/Home
 export GRAILS_HOME=~/local/grails
 export PATH=$GRAILS_HOME/bin:$PATH
+export GREP_COLOR="38;5;245"
+export GREP_OPTIONS="--color=auto"
 #export LESS=-RX
 
 alias gem-server="gem server --daemon"
@@ -21,9 +23,12 @@ alias addp="git add --patch"
 alias push?='git cherry -v origin/master'
 alias pull="git pull --rebase"
 alias tag="git tag -a"
-alias reset="git reset --hard"
+alias rollback="git reset --hard"
 alias co="git checkout"
+
+
 alias netstat="netstat -nal -p tcp && netstat -nal -p udp"
+alias ..='cd ..'
 
 set -o vi
 
