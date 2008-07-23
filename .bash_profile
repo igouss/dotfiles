@@ -21,6 +21,7 @@ alias addp="git add --patch"
 alias push?='git cherry -v origin/master'
 alias pull="git pull --rebase"
 alias tag="git tag -a"
+alias reset="git reset --hard"
 alias netstat="netstat -nal -p tcp && netstat -nal -p udp"
 
 set -o vi
