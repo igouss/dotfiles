@@ -5,7 +5,8 @@ export MANPAGER="col -b | view -c 'set ft=man nomod nolist' -"
 export CLICOLOR=1
 export JAVA_HOME=/Library/Java/Home
 export GRAILS_HOME=~/local/grails
-export PATH=$GRAILS_HOME/bin:$PATH
+export GROOVY_HOME=~/local/groovy
+export PATH=$GROOVY_HOME/bin:$GRAILS_HOME/bin:$PATH
 export GREP_COLOR="38;5;245"
 export GREP_OPTIONS="--color=auto"
 #export LESS=-RX
@@ -28,6 +29,8 @@ alias co="git checkout"
 
 alias netstat="netstat -nal -p tcp && netstat -nal -p udp"
 alias ..='cd ..'
+
+function digg() { pushd ~/apps/digg ; grails $@; popd; }
 
 set -o vi
 
