@@ -22,7 +22,6 @@ alias add="git add ."
 alias addp="git add --patch"
 alias push?='git cherry -v origin/master'
 alias pull="git pull --rebase"
-alias tag="git tag -a"
 alias rollback="git reset --hard"
 alias co="git checkout"
 
