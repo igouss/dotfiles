@@ -23,6 +23,7 @@ set statusline=[%l,%c\ %P%M]\ %f\ %r%h%w
 set title 
 set icon
 set autoread
+let g:netrw_browse_split = 3
 
 " Folding
 set foldenable
@@ -41,6 +42,15 @@ set expandtab
 autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 autocmd BufNewFile,BufRead *.rhtml setlocal ft=eruby
 autocmd BufNewFile,BufRead COMMIT_EDITMSG set filetype=gitcommit
+au BufNewFile,BufRead *.groovy  setf groovy 
+if did_filetype()
+finish
+endif
+
+if getline(1) =~ '^#!.*[/\\]groovy\>'
+setf groovy
+endif
+
 
 let g:explHideFiles='^\.,.*\.sw[po]$,.*\.log$'
 let g:explDetailedHelp=0
