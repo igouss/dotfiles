@@ -23,6 +23,7 @@ set statusline=[%l,%c\ %P%M]\ %f\ %r%h%w
 set title 
 set icon
 set autoread
+set showtabline=2
 let g:netrw_browse_split = 3
 
 " Folding
@@ -56,7 +57,7 @@ let g:explHideFiles='^\.,.*\.sw[po]$,.*\.log$'
 let g:explDetailedHelp=0
 map  :Texplore<CR>
 
-map <s-t> <Esc>:tabclose<CR> 
+map <F1> <Esc>:tabclose<CR> 
 map <c-t> <Esc>:tabnew<CR>
 map <F2> <Esc>:tabprev<CR>
 map <F3> <Esc>:tabnext<CR>
@@ -69,3 +70,6 @@ map l <Right>:nohlsearch<CR>
 map <F5> :set paste<CR>
 map <F6> :set nopaste<CR>
 
+highlight TabLineSel    guifg=White guibg=Red ctermfg=White ctermbg=Red
+highlight TabLine   ctermfg=Black ctermbg=White
+highlight TabLineFill ctermfg=Black ctermbg=White
