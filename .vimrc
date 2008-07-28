@@ -16,6 +16,9 @@ set cmdheight=2
 set laststatus=2
 "set number
 set showmatch
+set mat=5 " how many tenths of a second to blink matching brackets for
+set novisualbell
+set noerrorbells
 set showmode
 set cursorline
 set hlsearch
@@ -28,6 +31,7 @@ set smartcase
 set wildmenu
 set showtabline=2
 set directory=~/tmp/
+set shortmess=atI " shortens messages to avoid 'press a key' prompt 
 let g:netrw_browse_split = 3
 
 " Folding
