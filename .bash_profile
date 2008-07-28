@@ -26,7 +26,7 @@ alias pull="git pull --rebase"
 alias rollback="git reset --hard"
 alias co="git checkout"
 
-
+alias vimm="vim +Vexplore"
 alias netstat="netstat -nal -p tcp && netstat -nal -p udp"
 alias ..='cd ..'
 

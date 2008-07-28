@@ -9,7 +9,7 @@ set history=50
 " Visual
 syntax on
 "colorscheme delek
-colorscheme clarity
+colorscheme black_angus
 set ruler
 set showcmd
 set cmdheight=2
@@ -23,7 +23,11 @@ set statusline=[%l,%c\ %P%M]\ %f\ %r%h%w
 set title 
 set icon
 set autoread
+set autochdir
+set smartcase
+set wildmenu
 set showtabline=2
+set directory=~/tmp/
 let g:netrw_browse_split = 3
 
 " Folding
@@ -33,7 +37,6 @@ set foldmethod=indent
 
 " File detection and indenting
 filetype on
-filetype plugin on
 filetype plugin indent on
 runtime ftplugin/man.vim 
 
@@ -53,7 +56,10 @@ setf groovy
 endif
 
 
-let g:explHideFiles='^\.,.*\.sw[po]$,.*\.log$'
+let g:explHideFiles='^\.,\.~$,*swp$,\.DS_Store$'
+let g:explDetailedHelp=0
+let g:explDirsFirst=-1
+
 let g:explDetailedHelp=0
 map  :Texplore<CR>
 
@@ -73,3 +79,8 @@ map <F6> :set nopaste<CR>
 highlight TabLineSel    guifg=White guibg=Red ctermfg=White ctermbg=Red
 highlight TabLine   ctermfg=Black ctermbg=White
 highlight TabLineFill ctermfg=Black ctermbg=White
+
+"display trailing whitespace and tabs
+highlight SpecialKey ctermfg=DarkGray
+set list listchars=tab:\|_,trail:.
+
