@@ -29,6 +29,7 @@ alias rollback="git reset --hard"
 alias co="git checkout"
 alias clean="git clean -n -d"
 alias clean!="git clean -d"
+alias push="git push"
 
 alias vimm="vim +Vexplore"
 alias netstat="netstat -nal -p tcp && netstat -nal -p udp"
