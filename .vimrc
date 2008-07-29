@@ -3,7 +3,7 @@ set nocompatible
 set backup
 set incsearch
 set mouse=a
-set backspace=indent,eol,start
+set backspace=2
 set history=50
 
 " Visual
@@ -29,6 +29,8 @@ set autoread
 set autochdir
 set smartcase
 set wildmenu
+" allow ESC-sequenzes in 'insert-mode'
+set esckeys
 set showtabline=2
 set directory=~/tmp/
 set shortmess=atI " shortens messages to avoid 'press a key' prompt 
@@ -49,14 +51,18 @@ set shiftwidth=4
 set expandtab
 autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 autocmd BufNewFile,BufRead *.rhtml setlocal ft=eruby
+au BufNewFile * :exe("0r! ~/.vim/skeleton.rb %:p " . &filetype)
 autocmd BufNewFile,BufRead COMMIT_EDITMSG set filetype=gitcommit
+" When editing a file, always jump to the last cursor position.
+autocmd BufReadPost * if line("'\"") && line("'\"") <= line("$") | exe "normal `\"" | endif
+
 au BufNewFile,BufRead *.groovy  setf groovy 
 if did_filetype()
-finish
+    finish
 endif
 
 if getline(1) =~ '^#!.*[/\\]groovy\>'
-setf groovy
+    setf groovy
 endif
 
 
@@ -72,13 +78,15 @@ map <c-t> <Esc>:tabnew<CR>
 map <F2> <Esc>:tabprev<CR>
 map <F3> <Esc>:tabnext<CR>
 
-map j <Down>:nohlsearch<CR>
-map k <Up>:nohlsearch<CR>
-map h <Left>:nohlsearch<CR>
-map l <Right>:nohlsearch<CR> 
+map <c-l> <Esc>:nohlsearch<CR>
 
-map <F5> :set paste<CR>
-map <F6> :set nopaste<CR>
+" indent whole buffer
+noremap <F8> gg=G``
+
+set pastetoggle=<F5>
+"map <F5> :set paste<CR>
+"map <F6> :set nopaste<CR>
+"nmap <leader>rci :%!ruby-code-indenter<cr>
 
 highlight TabLineSel    guifg=White guibg=Red ctermfg=White ctermbg=Red
 highlight TabLine   ctermfg=Black ctermbg=White
@@ -87,4 +95,12 @@ highlight TabLineFill ctermfg=Black ctermbg=White
 "display trailing whitespace and tabs
 highlight SpecialKey ctermfg=DarkGray
 set list listchars=tab:\|_,trail:.
+
+set statusline=%<[%n]\ %F\ \ Filetype=\%Y\ \ %r\ %1*%m%*%w%=%(Line:\ %l%)%4(%)Column:\ %5(%c%V/%{strlen(getline(line('.')))}%)\ %4(%)%p%%
+" set statusline=[%n]\ %<%f\ %((%1*%M%*%R%Y)%)\ %=%-19(\LINE\ [%3l/%3L]\ COL\ [%02c%03V]%)\ %P
+" set statusline=\ %m%r\ \ (Vim\ %{Version()})\ [%02n]\ %t\ [%{Fileformat()}]\ %=(%Y)\ L:%l/%L\ C:%c\ P:%p\ \ \ [%{strftime\(\"\%R\"\)}]\%<\ \ \
+" set statusline=-%m%r-----(Vim\ %{Version()})\ [%02n]\ %t\ %=(%Y)\ %l/%L,%c\ \ [%{strftime\(\"\%R\"\)}]\%<---------
+" set statusline=[%n]\ %<%f\ %((%1*%M%*%R%Y)%)\ %=%-19(\LINE\ [%3l/%3L]\ COL\ [%02c%03V]%)\ ascii['%02b']\ %P
+" set statusline=%<[%n]\ %F\ \ Filetype=\%Y\ \ Fileformat=%{Fileformat()}\ \ %r\ %1*%m%*%w%=%(Column:\ %c%V%)%4(%)%-10(Line:\ %l%)\ %4(%)%p%% 
+" set statusline=%4*%m%3*%<%F%3*%=Christian\ Schneider\ %5*\ Line\et
 

@@ -1,0 +1,12 @@
+<%require 'date'%>
+
+<%= `figlet -c README` %>
+<%# figlet: http://www.figlet.org %>
+
+
+Author: Iouri Goussev <i.gouss@gmail.com>
+Date: <%= Date.today.strftime("%d/%m/%y") %> 
+Time: <%= Time.now.strftime("%H:%M:%S") %>
+
+<% directory = File.dirname(file) %>
+Project: <%= File.split(directory).last %>
