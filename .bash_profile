@@ -6,7 +6,9 @@ export CLICOLOR=1
 export JAVA_HOME=/Library/Java/Home
 export GRAILS_HOME=~/local/grails
 export GROOVY_HOME=~/local/groovy
+export JRUBY_HOME=~/local/jruby
 export PATH=$GROOVY_HOME/bin:$GRAILS_HOME/bin:$PATH
+export PATH=$JRUBY_HOME/bin:$PATH
 export GREP_COLOR="38;5;245"
 export GREP_OPTIONS="--color=auto"
 #export LESS=-RX
@@ -25,6 +27,8 @@ alias push?='git cherry -v origin/master'
 alias pull="git pull --rebase"
 alias rollback="git reset --hard"
 alias co="git checkout"
+alias clean="git clean -n -d"
+alias clean!="git clean -d"
 
 alias vimm="vim +Vexplore"
 alias netstat="netstat -nal -p tcp && netstat -nal -p udp"
