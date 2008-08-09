@@ -23,7 +23,7 @@ set showmode
 set cursorline
 set hlsearch
 set statusline=[%l,%c\ %P%M]\ %f\ %r%h%w
-set title 
+set title
 set icon
 set autoread
 set autochdir
@@ -33,22 +33,27 @@ set wildmenu
 set esckeys
 set showtabline=2
 set directory=~/tmp/
-set shortmess=atI " shortens messages to avoid 'press a key' prompt 
-let g:netrw_browse_split = 3
-
+set shortmess=atI " shortens messages to avoid 'press a key' prompt
+let g:netrw_browse_split=3
+let g:netrw_hide=1
+let g:netrw_fastbrowse=2
 " Folding
 set foldenable
-set foldlevel=2
+set foldlevel=3
 set foldmethod=indent
+
+set guioptions-=m
+set guioptions-=T
 
 " File detection and indenting
 filetype on
 filetype plugin indent on
-runtime ftplugin/man.vim 
+runtime ftplugin/man.vim
 
 set tabstop=4
 set shiftwidth=4
-set expandtab
+"set expandtab
+
 autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 autocmd BufNewFile,BufRead *.rhtml setlocal ft=eruby
 au BufNewFile * :exe("0r! ~/.vim/skeleton.rb %:p " . &filetype)
@@ -75,10 +80,17 @@ map  :Texplore<CR>
 
 map <F1> <Esc>:tabclose<CR> 
 map <c-t> <Esc>:tabnew<CR>
-map <F2> <Esc>:tabprev<CR>
-map <F3> <Esc>:tabnext<CR>
+"map <F2> <Esc>:tabprev<CR>
+"map <F3> <Esc>:tabnext<CR>
+
+nnoremap <Tab> <Esc>:tabnext<CR>
+nnoremap <S-Tab> <Esc>:tabprev<CR>
 
 map <c-l> <Esc>:nohlsearch<CR>
+
+" remap Ctrl-W to delerte current word
+map <C-W> bdwA
+imap <C-W> <Esc>bdwA
 
 " indent whole buffer
 noremap <F8> gg=G``
@@ -92,9 +104,16 @@ highlight TabLineSel    guifg=White guibg=Red ctermfg=White ctermbg=Red
 highlight TabLine   ctermfg=Black ctermbg=White
 highlight TabLineFill ctermfg=Black ctermbg=White
 
+"highlight ExtraWhitespace ctermbg=darkgreen guibg=lightgreen
+"highlight ExtraWhitespace ctermbg=red guibg=red
+"highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+"autocmd BufWinEnter * match ExtraWhitespace /^\s* \s*\|\s\+$/
+
+
 "display trailing whitespace and tabs
 highlight SpecialKey ctermfg=DarkGray
 set list listchars=tab:\|_,trail:.
+
 
 set statusline=%<[%n]\ %F\ \ Filetype=\%Y\ \ %r\ %1*%m%*%w%=%(Line:\ %l%)%4(%)Column:\ %5(%c%V/%{strlen(getline(line('.')))}%)\ %4(%)%p%%
 " set statusline=[%n]\ %<%f\ %((%1*%M%*%R%Y)%)\ %=%-19(\LINE\ [%3l/%3L]\ COL\ [%02c%03V]%)\ %P
