@@ -96,6 +96,10 @@ imap <C-W> <Esc>bdwA
 noremap <F8> gg=G``
 
 set pastetoggle=<F5>
+nmap :W :w
+nmap :Q :q
+nmap :WQ :wq
+
 "map <F5> :set paste<CR>
 "map <F6> :set nopaste<CR>
 "nmap <leader>rci :%!ruby-code-indenter<cr>
