@@ -17,10 +17,10 @@ import os,xmpp,time
 # available at http://edge.nfshost.com/blog/2006/07/16/how-to-connect-to-the-yahoo-transport-through-the-todo-bot/
 
 # =========BEGIN CONFIGURATION============
-SCREENNAME = 'yourbotnick@jabber.org'	# Your bot's Jabber ID (eg.kmshiva@gabfest.net)
-PASSWORD   = 'yourbotpassword'		# Your bot Jabber pasword
-COMMANDER  = 'commanderNick@jabber.org'	# Your Jabber ID
-TODOSCRIPT = '/home/shiva/bin/todo.sh'	# Path to your todo script
+SCREENNAME = 'todobot123@jabber.org'	# Your bot's Jabber ID (eg.kmshiva@gabfest.net)
+PASSWORD   = ''# Your bot Jabber pasword
+COMMANDER  = 'i.gouss@gmail.com'	# Your Jabber ID
+TODOSCRIPT = '/Users/i_gouss/bin/todo.sh'	# Path to your todo script
 GTALK_SERVER = 'talk.google.com'        # google talk server - you shouldn't need to change this
 # =========END CONFIGURATION==============
 

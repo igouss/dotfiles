@@ -56,15 +56,19 @@ runtime ftplugin/man.vim
 set tabstop=4
 set shiftwidth=4
 "set expandtab
-au BufRead,BufNewFile todo.txt,*.todo.txt,recur.txt,*.todo set filetype=todo
+
+
+"autocmd {event} {path} {ex commands and options}
+"autocmd BufRead,BufNewFile *.java set expandtab
+autocmd BufRead,BufNewFile todo.txt,*.todo.txt,recur.txt,*.todo set filetype=todo
 autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 autocmd BufNewFile,BufRead *.rhtml setlocal ft=eruby
-au BufNewFile * :exe("0r! ~/.vim/skeleton.rb %:p " . &filetype)
+autocmd BufNewFile * :exe("0r! ~/.vim/skeleton.rb %:p " . &filetype)
 autocmd BufNewFile,BufRead COMMIT_EDITMSG set filetype=gitcommit
 " When editing a file, always jump to the last cursor position.
 autocmd BufReadPost * if line("'\"") && line("'\"") <= line("$") | exe "normal `\"" | endif
+autocmd BufNewFile,BufRead *.groovy  setf groovy 
 
-au BufNewFile,BufRead *.groovy  setf groovy 
 if did_filetype()
     finish
 endif
