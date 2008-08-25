@@ -4,6 +4,7 @@
 set nocompatible
 " Behaviour
 set backup
+set backupcopy=yes
 set incsearch
 set mouse=a
 set backspace=2

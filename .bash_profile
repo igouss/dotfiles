@@ -14,6 +14,7 @@ export PATH=$GROOVY_HOME/bin:$GRAILS_HOME/bin:$PATH
 export PATH=$JRUBY_HOME/bin:$PATH
 export GREP_COLOR="38;5;245"
 export GREP_OPTIONS="--color=auto"
+export EDITOR=vim
 #export LESS=-RX
 
 alias gem-server="gem server --daemon"
