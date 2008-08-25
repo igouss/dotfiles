@@ -1,3 +1,6 @@
+source ~/.bash_completion.d/git-completion.sh
+source ~/.bash_completion.d/todo_completer.sh
+
 #export PS1=">"
 export PS1='[\W$(__git_ps1 " (%s)")]\$ '
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
@@ -34,10 +37,12 @@ alias push="git push"
 alias reset="git reset --hard HEAD^"
 alias grm="git ls-files -deleted | xargs git rm"
 alias append="git commit --amend"
+alias t='~/bin/todo.py'
 
 alias vimm="vim +Vexplore"
 alias netstat="netstat -nal -p tcp && netstat -nal -p udp"
 alias ..='cd ..'
+complete -F _todo_sh -o default t
 
 function digg() { pushd ~/apps/digg ; grails $@; popd; }
 

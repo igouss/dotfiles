@@ -55,7 +55,7 @@ runtime ftplugin/man.vim
 set tabstop=4
 set shiftwidth=4
 "set expandtab
-
+au BufRead,BufNewFile todo.txt,*.todo.txt,recur.txt,*.todo set filetype=todo
 autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 autocmd BufNewFile,BufRead *.rhtml setlocal ft=eruby
 au BufNewFile * :exe("0r! ~/.vim/skeleton.rb %:p " . &filetype)

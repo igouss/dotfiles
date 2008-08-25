@@ -7,3 +7,5 @@
 !.gitconfig
 !.git-completion.sh
 !.irbrc
+!bin/
+!todo/
