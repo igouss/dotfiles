@@ -1,3 +1,6 @@
+" 
+" Author: Iouri Goussev <i.gouss+vimrc@gmail.com>
+"
 set nocompatible
 " Behaviour
 set backup
