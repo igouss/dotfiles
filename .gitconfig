@@ -6,7 +6,5 @@
 [user]
 	name = Iouri Goussev
 	email = i.gouss@gmail.com
-[pack]
-	threads = 0
 [diff]
     renames = true
