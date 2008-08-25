@@ -30,7 +30,10 @@ alias co="git checkout"
 alias clean="git clean -n -d"
 alias clean!="git clean -d"
 alias push="git push"
-alias reset="git reset HEAD^"
+#alias reset="git reset HEAD^"
+alias reset="git reset --hard HEAD^"
+alias grm="git ls-files -deleted | xargs git rm"
+alias append="git commit --amend"
 
 alias vimm="vim +Vexplore"
 alias netstat="netstat -nal -p tcp && netstat -nal -p udp"
@@ -51,3 +54,4 @@ ruby -e'include Math;(-7..30).each{|y|s="";\
 ((sin(x/8.0)+2+sin(y*x/2.0))**       \
 (sin(y/7.0)+1)*12/16.0)]};puts s}'
 alias
+alias =clear
