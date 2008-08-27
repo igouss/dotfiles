@@ -39,6 +39,7 @@ alias reset="git reset --hard HEAD^"
 alias grm="git ls-files -deleted | xargs git rm"
 alias append="git commit --amend"
 alias t='~/bin/todo.py'
+alias p='~/bin/todo.py'
 
 alias vimm="vim +Vexplore"
 alias netstat="netstat -nal -p tcp && netstat -nal -p udp"

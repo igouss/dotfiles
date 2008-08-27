@@ -3,6 +3,7 @@
 TODO.TXT Manager - Python Version
 Author          : Shane Koster <shane.koster@gmail.com>
 Modified by     : Graham Davies <grahamdaviez@gmail.com>
+Modified by     : Bryan Kam <todo@lydgate.e4ward.com>
 Concept by      : Gina Trapani (ginatrapani@gmail.com
 License         : GPL, http://www.gnu.org/copyleft/gpl.html
 More info       : http://todotxt.com
@@ -12,10 +13,10 @@ Project todo.txt: http://todo-py.googlecode.com/svn/trunk/todo.txt
 """
 
 __version__   = "1.8.1-py-trunk"
-__revision__  = "$Revision: 158 $"
-__date__      = "2006/07/29"
+__revision__  = "$Revision: 104 $"
+__date__      = "2008/02/18"
 __author__    = "Shane Koster (shane.koster@gmail.com)"
-__copyright__ = "Copyright 2006, Gina Trapani"
+__copyright__ = "Copyright 2006, Gina Trapani, Bryan Kam"
 __license__   = "GPL"
 __history__   = "See http://todo-py.googlecode.com/svn/trunk/CHANGELOG"
 
@@ -29,7 +30,7 @@ TODO_DIR = ''
 # ANSI (light|dark|nocolor) or Windows Console (windark)
 # Or use -t theme flag
 # Or use BGCOL environment variable
-defaultTheme = 'light'
+defaultTheme = 'dark'
 
 # Set default verbosity level with False or True
 # True will display various messages after each action - useful for bots
@@ -37,11 +38,6 @@ defaultTheme = 'light'
 verbose = False
 quiet = False
 force = False
-
-# should we wait for the editor to finish - or return to the shell now
-# use waitEditor = True for console editors vim|vi|emacs|joe etc
-# use False for notepad.exe|gedit|kedit 
-waitEditor = False
 
 # set your sort preferences
 # Or use -i flag for sortIgnoreCase = False
@@ -109,8 +105,14 @@ WIN_GREY     = 0x08
 ############################################################
 # Be careful changing things below here
 
-import re, os, sys, time, getopt, sets
+import re, os, sys, time, getopt, sets, subprocess
 from shutil import copyfile
+
+# Guess the pager!
+try:
+    PAGER = os.environ['PAGER']
+except KeyError:
+    PAGER = 'less'
 
 def usage():
     text =  "Usage: todo.py [options] [ACTION] [PARAM...] \n"
@@ -148,6 +150,9 @@ def help(longmessage = False):
     archive
       Moves done items from todo.txt to done.txt.
 
+    commit
+      Commit any changes to git repository (git commit -a).
+
     del NUMBER
     rm  NUMBER
       Deletes the item on line NUMBER in todo.txt.
@@ -178,6 +183,9 @@ def help(longmessage = False):
       Displays all items prioritized PRIORITY.
       If no PRIORITY specified, lists all prioritized items.
 
+    log
+      Displays the git log associated with todo.txt.
+
     pri NUMBER PRIORITY
       Adds PRIORITY to todo on line NUMBER.  If the item is already
       prioritized, replaces current priority with new PRIORITY.
@@ -197,10 +205,20 @@ def help(longmessage = False):
     ed
       Opens your done.txt file with $EDITOR or /etc/alternatives/editor.
 
+    erecur
+    er
+      Opens your recur.txt file with $EDITOR or /etc/alternatives/editor.
+
+    pull
+      Pull changes to remote git repository
+
+    push
+      Push changes to remote git repository
+
     replace NUMBER "UPDATED TODO"
       Replaces todo on line NUMBER with UPDATED TODO.
 
-    remdup
+    rmdup
       Removes exact duplicate lines from todo.txt.
 
     report
@@ -225,15 +243,18 @@ def help(longmessage = False):
   Version """ + __version__ + " " + __revision__[1:-1] + """
   Copyleft 2006, Gina Trapani (ginatrapani@gmail.com)
   Copyleft 2006, Shane Koster (shane.koster@gmail.com)
+  Copyleft 2008, Bryan Kam (todo@lydgate.e4ward.com)
 """
     else:
 
         text = "todo.txt manager " + __version__ + " " + __revision__[1:-1] + """
-Copyleft 2006  Gina Trapani, Shane Koster
+Copyleft 2008  Gina Trapani, Shane Koster, Bryan Kam
 
 Usage: todo.py [options] [ACTION] [PARAM...]
 
  a,   add "TODO p:project @context"   Add TODO to your todo.txt
+ c,   commit                          Commit changes to git
+ l,   log                             Display todo.txt's git log
  ls,  list  [TERM] [[TERM]...]        Display todo's that contain TERM
  lsa, list  [TERM] [[TERM]...]        Display todo's and children
  lsp, lspri [PRIORITY]                Display all items prioritized PRIORITY
@@ -241,6 +262,8 @@ Usage: todo.py [options] [ACTION] [PARAM...]
  lsr, [all]projects                   Display projects in todo.txt *
  lsk, [all]keywords                   Display projects and contexts  *
  p,   pri NUMBER PRIORITY             Set PRIORITY on todo NUMBER
+      pull                            Pull from git
+      push                            Push to git
       do NUMBER [COMMENT]             Mark item NUMBER as done
       done "DONE p:project @context"  Add DONE to your done.txt
       append NUMBER "TEXT"            Add to the end of the todo
@@ -249,7 +272,8 @@ Usage: todo.py [options] [ACTION] [PARAM...]
       replace NUMBER "UPDATED TODO"   Replace todo NUMBER with UPDATED TODO
  e,   edit                            Opens todo.txt in $EDITOR
 ed,   edone                           Opens done.txt in $EDITOR
-      remdup                          Remove exact duplicate todo's
+er,   erecur                          Opens recur.txt in $EDITOR
+      rmdup                          Remove exact duplicate todo's
 ar,   archive                         Move done items to done.txt
       report                          Add todo and done count to report.txt
  b,   birdseye                        Bird's eye view report
@@ -275,9 +299,15 @@ Options:
     print text
     sys.exit()
 
+def commit(files,msg):
+    os.chdir(TODO_DIR)
+    for i in files:
+        subprocess.Popen(["git","add",i]).wait()
+    subprocess.Popen(["git","commit","-m","%s" % msg]).wait()
+
 def setDirs(dir):
     """Your todo/done/report.txt locations"""
-    global TODO_DIR, TODO_FILE, DONE_FILE, REPORT_FILE, TODO_BACKUP, DONE_BACKUP
+    global TODO_DIR, TODO_FILE, DONE_FILE, RECUR_FILE, REPORT_FILE, TODO_BACKUP, DONE_BACKUP
 
     if os.environ.has_key("TODO_DIR"):
         dir = os.environ["TODO_DIR"]
@@ -291,6 +321,7 @@ def setDirs(dir):
     TODO_DIR    = dir
     TODO_FILE   = dir + os.path.sep + "todo.txt"
     DONE_FILE   = dir + os.path.sep + "done.txt"
+    RECUR_FILE  = dir + os.path.sep + "recur.txt"
     REPORT_FILE = dir + os.path.sep + "report.txt"
     TODO_BACKUP = dir + os.path.sep + "todo.bak"
     DONE_BACKUP = dir + os.path.sep + "done.bak"
@@ -422,7 +453,9 @@ def add(text):
     f = open(TODO_FILE, "a")
     f.write(text + os.linesep)
     f.close()
-    if not quiet: print "Added: ", text
+    msg = "Added: " + text
+    if not quiet: print msg
+    commit(['todo.txt'],msg)
 
 def setPriority(text):
     """Handle priority if exisiting in supplied text"""
@@ -489,7 +522,9 @@ def delete(item):
         tasks[item + 1] = growChild(tasks[item + 1])
     deleted = tasks.pop(item)
     writeTasks(tasks)
-    if not quiet: print "Deleted: ", deleted
+    msg = "Deleted: %s" % deleted
+    if not quiet: print msg
+    commit(['todo.txt'],msg)
 
 def backup(orig, backup):
     """Make a copy of the file before writing data"""
@@ -528,9 +563,17 @@ def do(items, comments=None):
 
         date = time.strftime("%Y-%m-%d", time.localtime())
         print "Done %d: %s" % (item, tasks[item])
+        try:
+            msg += "Done %d: %s\n" % (item, tasks[item])
+        except:
+            msg = "Done %d: %s\n" % (item, tasks[item])
         tasks[item] = " ".join(["x", date, tasks[item]])
     writeTasks(tasks)
     archive()
+    try:
+        commit(['todo.txt','done.txt'],msg)
+    except UnboundLocalError:
+        pass
 
 def done(item):
     """add a completed task directly to done file"""
@@ -539,7 +582,9 @@ def done(item):
     f = open(DONE_FILE, "a")
     f.write(text + os.linesep)
     f.close()
-    if not quiet: print "Done: %s" % item
+    msg = "Done: %s" % item
+    if not quiet: print msg
+    commit(['done.txt'],msg)
 
 def list(patterns=None, userinput=True, showChildren=False, \
         listDone=False, matchAny=False, dates=None):
@@ -554,6 +599,9 @@ def list(patterns=None, userinput=True, showChildren=False, \
         matchAny  - switch, patterns are AND (False) or OR (True) matched
         dates     - list of date patterns for search OR matched
     """
+    # Reset the repo, since it may have been pushed or whatever.
+    os.chdir(TODO_DIR)
+    # Open a pager by default for lists
     items = []
     temp = {}
     tasks = getTaskDict()
@@ -572,10 +620,14 @@ def list(patterns=None, userinput=True, showChildren=False, \
 
     if not showChildren: tasks = hideChildren(tasks)
 
+    taskNumber = 0
     # Format gathered tasks
     for k,v in tasks.iteritems():
+        taskNumber += 1
         items.append("%3d: %s" % (k, v))
-
+    rows = os.popen('tput lines').readline()
+    if taskNumber > int(rows):
+        sys.stdout = os.popen(PAGER,'w')
     # Print this before the tasks to make jabber bot pretty
     if verbose:
         print "todo.py: %d tasks in %s:" % ( len(items), TODO_FILE )
@@ -632,6 +684,7 @@ def removeDone(tasks):
 
 def listKeywords():
     """Preliminary function to count keywords in todo and done files"""
+    sys.stdout = os.popen(PAGER,'w')
     items = []
     tasks = getTaskDict()
     numTasks = len(tasks)
@@ -738,25 +791,15 @@ def replace(item, text):
 
 def edit(file):
     """opens your todo.txt file with a local editor if found"""
-    # Use EDITOR for vim style editors 
     if os.environ.has_key('EDITOR'):
         editor = os.environ['EDITOR']
     elif os.name == 'posix':
         editor = "/etc/alternatives/editor"
-
-    if not waitEditor:
-        try:
-            from subprocess import Popen
-            retcode = Popen([editor, file])
-        except (IOError, os.error), why:
-            print "Problem with your editor %s: %s" % (editor, str(why))
-            sys.exit()
-    else:
-        try:
-            os.execvp(editor, [editor, file])
-        except (IOError, os.error), why:
-            print "Problem with your editor %s: %s" % (editor, str(why))
-            sys.exit()
+    try:
+        os.execvp(editor, [editor, file])
+    except (IOError, os.error), why:
+        print "Problem with your editor %s: %s" % (editor, str(why))
+        sys.exit()
 
 def removeDuplicates():
     """Removes duplicate lines in the TODO file"""
@@ -764,7 +807,6 @@ def removeDuplicates():
     theSet = sets.Set(taskCopy.values())
     dupCount = len(taskCopy) - len(theSet)
     if dupCount > 0:
-        print "Removing %d duplicates." % (dupCount)
         count = 0
         tasks = {}
         for k,v in taskCopy.iteritems():
@@ -773,6 +815,9 @@ def removeDuplicates():
                 tasks[ count ] = v
                 theSet.remove(v)
         writeTasks(tasks)
+        msg = "Removed %d duplicates." % (dupCount)
+        print msg
+        commit(['todo.txt'],msg)
     else:
         print "There are no duplicates to eliminate!"
     sys.exit()
@@ -857,16 +902,29 @@ def prioritize(item, newpriority):
         sys.exit(1)
 
     re_pri = re.compile(r"\([A-Z]\) ")
+    try:
+        oldpriority = re.search(re_pri, tasks[item]).group(0)
+    except:
+        oldpriority = ""
+    if oldpriority == "(%s) " % newpriority \
+            or oldpriority == "" and newpriority == "" :
+        print "Priority unchanged"
+        sys.exit(1)
 
     if (newpriority == ""):
         # remove the existing priority
         tasks[item] = re.sub(re_pri, "", tasks[item])
+        msg = 'Removed priority for %d: %s' % (item,tasks[item])
     elif (re.match(re_pri, tasks[item])):
         tasks[item] = re.sub(re_pri, "(" + newpriority + ") ", tasks[item])
+        msg = 'Changed priority for %d: %s-> %s' % (item,oldpriority,tasks[item])
     else:
         tasks[item] = "(" + newpriority + ") " + tasks[item]
+        msg = 'Set priority for %d: %s' % (item,tasks[item])
 
+    if not quiet: print msg
     writeTasks(tasks)
+    commit(['todo.txt'],msg)
 
 def hasPriority(text):
     re_pri = re.compile(r"^\(([A-Z])\) ")
@@ -926,7 +984,10 @@ def addChild(parent, text):
     items.insert(parent + 1,text)
 
     writeTaskList(items)
-    if not quiet: print "%d got child: %s " % (parent, text)
+    msg = "%d got child: %s " % (parent, text)
+    if not quiet: print msg
+    commit(['todo.txt'],msg)
+
 
 def addParent(child, text):
     """Give a task a parent task - and make it a child"""
@@ -948,7 +1009,9 @@ def addParent(child, text):
     items.insert(parent + 1, text)
 
     writeTaskList(items)
-    if not quiet: print "%d got parent: %s " % (child, text)
+    msg = "%d got parent: %s " % (child, text)
+    if not quiet: print msg
+    commit(['todo.txt'],msg)
 
 def newParent(child, parent):
     """Give a task to a parent task, make it a child"""
@@ -964,7 +1027,9 @@ def newParent(child, parent):
     else:
         items.pop(child)
     writeTaskList(items)
-    if not quiet: print "%d now belongs to parent: %s " % (child, parent)
+    msg = "%d now belongs to parent: %s " % (child, parent)
+    if not quiet: print msg
+    commit(['todo.txt'],msg)
 
 def isChild(text):
     if text.startswith(childSymbol):
@@ -1148,6 +1213,9 @@ if __name__ == "__main__":
         else:
             x = ["\([A-Z]\)"]
         list(x, False)
+    elif (action == "l" or action == "log"):
+        os.chdir(TODO_DIR)
+        subprocess.Popen(["git","log"]).wait()
     elif (action == "pri" or action == "p"):
         if (len(args) == 2 and args[0].isdigit() and args[1].isalpha()):
             prioritize(int(args[0]), args[1])
@@ -1156,6 +1224,15 @@ if __name__ == "__main__":
             prioritize(int(args[0]), "")
         else:
             print "Usage: " + sys.argv[0] + " pri <item_num> [PRIORITY]"
+    elif (action == "pull"):
+        os.chdir(TODO_DIR)
+        subprocess.Popen(["git","pull"]).wait()
+    elif (action == "commit" or action == "c"):
+        os.chdir(TODO_DIR)
+        subprocess.Popen(["git","commit","-a"]).wait()
+    elif (action == "push"):
+        os.chdir(TODO_DIR)
+        subprocess.Popen(["git","push"]).wait()
     elif (action == "replace"):
         if (len(args) > 1 and args[0].isdigit()):
             replace(int(args[0]), " ".join(args[1:]))
@@ -1165,7 +1242,9 @@ if __name__ == "__main__":
         edit(TODO_FILE)
     elif (action == "edone" or action == "ed"):
         edit(DONE_FILE)
-    elif (action == "remdup"):
+    elif (action == "erecur" or action == "er"):
+        edit(RECUR_FILE)
+    elif (action == "rmdup"):
         removeDuplicates()
     elif (action == "report"):
         report()
