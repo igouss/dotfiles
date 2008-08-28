@@ -47,7 +47,7 @@ sortIgnoreCase = True
 numericSort = False
 
 # Set your prefered symbol for a child task
-childSymbol = "_"
+childSymbol = "-"
 
 # Set your preferences, how entering priorities should be handled.
 # singleLetterPriority = False means, you enter a priority of a

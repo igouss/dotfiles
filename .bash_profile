@@ -29,6 +29,8 @@ alias add="git add ."
 alias addp="git add --patch"
 alias push?='git cherry -v origin/master'
 alias pull="git pull --rebase"
+alias rebase="git rebase -i "
+alias rebaseok="git rebase --continue"
 alias rollback="git reset --hard"
 alias co="git checkout"
 alias clean="git clean -n -d"
@@ -38,8 +40,13 @@ alias push="git push"
 alias reset="git reset --hard HEAD^"
 alias grm="git ls-files -deleted | xargs git rm"
 alias append="git commit --amend"
-alias t='~/bin/todo.py'
+alias conflict="git mergetool --tool=vimdiff"
 alias p='~/bin/todo.py'
+alias pls='~/bin/todo.py ls'
+alias pla='~/bin/todo.py lsa'
+alias pad='~/bin/todo.py add'
+alias prm='~/bin/todo.py rm'
+alias pb='~/bin/todo.py b'
 
 alias vimm="vim +Vexplore"
 alias netstat="netstat -nal -p tcp && netstat -nal -p udp"
