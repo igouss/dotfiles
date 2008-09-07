@@ -8,3 +8,4 @@
 !.git-completion.sh
 !.irbrc
 !bin/
+!.bash_completion.d/
