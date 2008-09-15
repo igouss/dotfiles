@@ -69,4 +69,4 @@ ruby -e'include Math;(-7..30).each{|y|s="";\
 (sin(y/7.0)+1)*12/16.0)]};puts s}'
 alias
 alias =clear
-t birdseye
+p birdseye
