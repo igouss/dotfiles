@@ -32,6 +32,7 @@ set icon
 set autoread
 set smartcase
 set wildmenu
+set virtualedit=all
 " allow ESC-sequenzes in 'insert-mode'
 set esckeys
 set showtabline=2
@@ -57,7 +58,6 @@ set tabstop=4
 set shiftwidth=4
 "set expandtab
 
-
 "autocmd {event} {path} {ex commands and options}
 "autocmd BufRead,BufNewFile *.java set expandtab
 autocmd BufRead,BufNewFile todo.txt,*.todo.txt,recur.txt,*.todo set filetype=todo
@@ -77,27 +77,27 @@ if getline(1) =~ '^#!.*[/\\]groovy\>'
     setf groovy
 endif
 
-
 let g:explHideFiles='^\.,\.~$,*swp$,\.DS_Store$'
 let g:explDetailedHelp=0
 let g:explDirsFirst=-1
-
 let g:explDetailedHelp=0
+
+inoremap <C-Space> <C-X><C-O>
 map  :Texplore<CR>
 
-map <F1> <Esc>:tabclose<CR> 
-map <c-t> <Esc>:tabnew<CR>
-"map <F2> <Esc>:tabprev<CR>
-"map <F3> <Esc>:tabnext<CR>
+map <C-PageUp> <Esc>:tabnew<CR>
+map <C-Left> :tabprev<CR>
+map <c-Right> <Esc>:tabnext<CR>
+map <C-PageDown> <Esc>:tabclose<CR> 
 
-nnoremap <Tab> <Esc>:tabnext<CR>
-nnoremap <S-Tab> <Esc>:tabprev<CR>
+"nnoremap <Tab> <Esc>:tabnext<CR>
+"nnoremap <S-Tab> <Esc>:tabprev<CR>
 
 map <c-l> <Esc>:nohlsearch<CR>
 
 " remap Ctrl-W to delerte current word
-map <C-W> bdwA
-imap <C-W> <Esc>bdwA
+"map <C-W> bdwA
+"imap <C-W> <Esc>bdwA
 
 " indent whole buffer
 noremap <F8> gg=G``
