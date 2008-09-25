@@ -39,7 +39,7 @@ set directory=~/tmp/
 set shortmess=atI " shortens messages to avoid 'press a key' prompt
 let g:netrw_browse_split=3
 let g:netrw_hide=1
-let g:netrw_fastbrowse=2
+let g:netrw_fastbrowse=0
 " Folding
 set foldenable
 set foldlevel=3
