@@ -16,7 +16,10 @@ export GREP_COLOR="38;5;245"
 export GREP_OPTIONS="--color=auto"
 export EDITOR=vim
 export HISTCONTROL=ignoredups
-
+# see http://www.macosxhints.com/article.php?story=20031025162727485
+export CLICOLOR=1
+#export LSCOLORS=gxfxcxdxbxegedabagacad
+export LSCOLORS=DxGxcxdxCxcgcdabagacad
 #export LESS=-RX
 
 alias gem-server="gem server --daemon"

@@ -43,8 +43,8 @@ let g:netrw_hide=1
 let g:netrw_fastbrowse=0
 " Folding
 set foldenable
-set foldlevel=3
-set foldmethod=indent
+" set foldlevel=3
+" set foldmethod=indent
 
 set guioptions-=m
 set guioptions-=T
