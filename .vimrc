@@ -30,8 +30,22 @@ set statusline=[%l,%c\ %P%M]\ %f\ %r%h%w
 set title
 set icon
 set autoread
+
+"These two options, when set together, will make /-style searches
+"case-sensitive only if there is a capital letter in the search expression.
+"*-style searches continue to be consistently case-sensitive
+set ignorecase 
 set smartcase
+
 set wildmenu
+set wildmode=list:longest
+
+"When the cursor is moved outside the viewport of the current window, the
+"buffer is scrolled by a single line. Setting the option below will start the
+"scrolling three lines before the border, keeping more context around where
+"you’re working.
+set scrolloff=3
+
 set virtualedit=all
 " allow ESC-sequenzes in 'insert-mode'
 set esckeys
@@ -54,9 +68,16 @@ filetype on
 filetype plugin indent on
 runtime ftplugin/man.vim
 
+"The % key will switch between opening and closing brackets. By sourcing
+"matchit.vim, it can also switch among e.g. if/elsif/else/end, between opening
+"and closing XML tags, and more. 
+runtime macros/matchit.vim
+
 set tabstop=4
 set shiftwidth=4
 "set expandtab
+
+
 
 "autocmd {event} {path} {ex commands and options}
 "autocmd BufRead,BufNewFile *.java set expandtab
@@ -90,6 +111,7 @@ map <C-Left> :tabprev<CR>
 map <c-Right> <Esc>:tabnext<CR>
 map <C-PageDown> <Esc>:tabclose<CR> 
 
+map <F1> <esc>
 "nnoremap <Tab> <Esc>:tabnext<CR>
 "nnoremap <S-Tab> <Esc>:tabprev<CR>
 
@@ -120,6 +142,13 @@ highlight TabLineFill ctermfg=Black ctermbg=White
 "highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
 "autocmd BufWinEnter * match ExtraWhitespace /^\s* \s*\|\s\+$/
 
+"highlight LeadingTab ctermbg=blue guibg=blue
+"highlight LeadingSpace ctermbg=darkgreen guibg=darkgreen
+"highlight EvilSpace ctermbg=darkred guibg=darkred
+"au Syntax * syn match LeadingTab /^\t\+/
+"au Syntax * syn match LeadingSpace /^\ \+/
+"au Syntax * syn match EvilSpace /\(^\t*\)\@<!\t\+/ " tabs not preceeded by tabs
+"au Syntax * syn match EvilSpace /[ \t]\+$/ " trailing space
 
 "display trailing whitespace and tabs
 highlight SpecialKey ctermfg=DarkGray

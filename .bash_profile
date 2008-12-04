@@ -75,3 +75,8 @@ ruby -e'include Math;(-7..30).each{|y|s="";\
 alias
 alias =clear
 p birdseye
+
+# Setting PATH for MacPython 2.5
+# The orginal version is saved in .bash_profile.pysave
+PATH="/Library/Frameworks/Python.framework/Versions/Current/bin:${PATH}"
+export PATH
