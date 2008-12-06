@@ -7,5 +7,6 @@
 !.gitconfig
 !.git-completion.sh
 !.irbrc
+!.alias
 !bin/
 !.bash_completion.d/
