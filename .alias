@@ -25,8 +25,8 @@ alias grm="git ls-files -deleted | xargs git rm"
 alias append="git commit --amend"
 alias conflict="git mergetool --tool=vimdiff"
 
-alias br="git branch"
-alias bra"git branch -a"
+#alias br="git branch"
+#alias bra"git branch -a"
 
 #
 # TODO Script
