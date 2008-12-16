@@ -8,11 +8,6 @@ shopt -s histappend
 export PS1='[\W$(__git_ps1 " (%s)")]\$ '
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 
-export PAGER="/bin/sh -c \"unset PAGER;col -b -x | \
-    vim -R -c 'set nomod nolist' -c 'map q :q<CR>' \
-	    -c 'map <SPACE> <C-D>' -c 'map b <C-U>' \
-		    -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
-
 export CLICOLOR=1
 export JAVA_HOME=/Library/Java/Home
 export GRAILS_HOME=~/local/grails
@@ -35,7 +30,7 @@ export LSCOLORS=DxGxcxdxCxcgcdabagacad
 
 complete -F _todo_sh -o default t
 
-function digg() { pushd ~/apps/digg ; grails $@; popd; }
+function man { /usr/bin/man $* | col -b | vim -c 'set ft=man nomod nolist' -; }
 
 set -o vi
 

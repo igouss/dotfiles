@@ -305,5 +305,3 @@ endfun
 
 " Quitting
 noremap q :q<CR>
-
-

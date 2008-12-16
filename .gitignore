@@ -10,3 +10,4 @@
 !.alias
 !bin/
 !.bash_completion.d/
+!pager
