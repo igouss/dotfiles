@@ -75,7 +75,7 @@ runtime macros/matchit.vim
 
 set tabstop=4
 set shiftwidth=4
-"set expandtab
+set expandtab
 
 
 
@@ -287,4 +287,23 @@ function! s:MyTabLine()  "{{{
   return s
 endfunction "}}}
 let &tabline = '%!' . s:SID_PREFIX() . 'MyTabLine()'
+
+
+ " Scroll one page forward
+noremap <script> <Space> :call <SID>NextPage()<CR><SID>L
+fun! s:NextPage()
+  if line(".") == line("$")
+    if argidx() + 1 >= argc()
+      quit
+    endif
+    next
+    1
+  else
+    exe "normal! \<C-F>"
+  endif
+endfun
+
+" Quitting
+noremap q :q<CR>
+
 

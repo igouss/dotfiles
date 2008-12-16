@@ -7,7 +7,12 @@ shopt -s histappend
 #export PS1=">"
 export PS1='[\W$(__git_ps1 " (%s)")]\$ '
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-export MANPAGER="col -b | view -c 'set ft=man nomod nolist' -" 
+
+export PAGER="/bin/sh -c \"unset PAGER;col -b -x | \
+    vim -R -c 'set nomod nolist' -c 'map q :q<CR>' \
+	    -c 'map <SPACE> <C-D>' -c 'map b <C-U>' \
+		    -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
+
 export CLICOLOR=1
 export JAVA_HOME=/Library/Java/Home
 export GRAILS_HOME=~/local/grails
