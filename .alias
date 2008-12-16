@@ -45,3 +45,4 @@ alias vimm="vim +Vexplore"
 alias netstat="netstat -nal -p tcp && netstat -nal -p udp"
 alias ..='cd ..'
 alias =clear
+alias top="top -o cpu -S"
