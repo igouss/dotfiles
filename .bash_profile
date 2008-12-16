@@ -30,7 +30,8 @@ export LSCOLORS=DxGxcxdxCxcgcdabagacad
 
 complete -F _todo_sh -o default t
 
-export MANPAGER="col -bx | view -c 'set ft=man nomod nolist' -"
+export MANPAGER="/bin/sh -c \"unset PAGER;col -b -x | \
+    vim -R -c 'set ft=man nomod nolist' -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
 
 set -o vi
 
