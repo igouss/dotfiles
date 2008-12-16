@@ -5,9 +5,11 @@ alias ci="git commit -a -v -m "
 alias cii="git commit -v  --interactive"
 alias st="git status -u"
 alias stt="git diff --name-status -r"
+
 alias dfwi="git diff"
 alias dfir="git diff --cached"
 alias dfwt="git diff HEAD"
+
 alias add="git add ."
 alias addp="git add --patch"
 alias push?='git cherry -v origin/master'
