@@ -30,7 +30,7 @@ export LSCOLORS=DxGxcxdxCxcgcdabagacad
 
 complete -F _todo_sh -o default t
 
-function man { /usr/bin/man $* | col -b | vim -c 'set ft=man nomod nolist' -; }
+export MANPAGER="col -bx | view -c 'set ft=man nomod nolist' -"
 
 set -o vi
 
