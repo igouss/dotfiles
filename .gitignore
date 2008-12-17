@@ -1,3 +1,4 @@
+<<<<<<< HEAD:.gitignore
 *
 !.vimrc
 !.gitignore
@@ -11,3 +12,11 @@
 !bin/
 !.bash_completion.d/
 !pager
+=======
+.DS_Store
+pkg
+coverage
+test_runs
+test_runs/**/*
+rdoc
+>>>>>>> 35f6af55ad1802a5368b9b9b0d1652a05de7d3c8:.gitignore
