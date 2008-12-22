@@ -6,6 +6,8 @@
 caption always " | %-w%{= BW}%50>%n %t%{-}%+w |%<"
 #hardstatus alwayslastline "%{BW}%16=%l %{BW}%50=%d/%m/%Y %{BW}%80=%c%="
 
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+
 #caption string "%{= k}"
 
 #defmonitor on           ## Turn monitoring on (see 'activity')  ##
@@ -36,6 +38,10 @@ defscrollback 5000
 # to navigate between windows
 bindkey ^[[5;5~ prev
 bindkey ^[[6;5~ next
+
+# page up / page down
+#bindkey -k kP prev
+#bindkey -k kN next
 
 # Bind arrow keys Control-Down to 'next', Control-Up to 'prev'
 # to navigate between windows

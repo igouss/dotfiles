@@ -6,16 +6,11 @@ shopt -s histappend
 
 #export PS1=">"
 export PS1='[\W$(__git_ps1 " (%s)")]\$ '
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+export PATH=$HOME/bin:/opt/local/bin:/opt/local/sbin:$PATH
 
 export CLICOLOR=1
 export JAVA_HOME=/Library/Java/Home
-export GRAILS_HOME=~/local/grails
-export GROOVY_HOME=~/local/groovy
-export JRUBY_HOME=~/local/jruby
-export PATH=$GROOVY_HOME/bin:$GRAILS_HOME/bin:$PATH
-export PATH=$JRUBY_HOME/bin:$PATH
-export PATH=$HOME/bin:$PATH
+
 # 30	black 31	red 32	green 33	yellow 34	blue 35	purple 36	cyan 37	white
 # export GREP_COLOR="38;5;245"
 export GREP_COLOR="32"
