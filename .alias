@@ -21,8 +21,11 @@ alias co="git checkout"
 alias clean="git clean -n -d"
 alias clean!="git clean -d"
 alias push="git push"
+
 #alias reset="git reset HEAD^"
 alias reset="git reset --hard HEAD^"
+alias giveup="git reset --hard"
+
 alias grm="git ls-files -deleted | xargs git rm"
 alias append="git commit --amend"
 alias conflict="git mergetool --tool=vimdiff"
@@ -48,3 +51,10 @@ alias netstat="netstat -nal -p tcp && netstat -nal -p udp"
 alias ..='cd ..'
 alias =clear
 alias top="top -o cpu -S"
+
+
+if [ "Darwin" = `uname` ]
+then
+    alias apachectl='sudo /opt/local/apache2/bin/apachectl'
+    alias mysqlctl='sudo /opt/local/share/mysql5/mysql/mysql.server'
+fi

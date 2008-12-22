@@ -1,0 +1,52 @@
+hardstatus on
+hardstatus alwayslastline
+#hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d-%m %{W}%c %{g}]'
+
+#caption always "%{kB}%?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{kB}%?%+Lw%?"
+caption always " | %-w%{= BW}%50>%n %t%{-}%+w |%<"
+hardstatus alwayslastline "%{BW}%16=%l %{BW}%50=%d/%m/%Y %{BW}%80=%c%="
+
+#caption string "%{= k}"
+
+#defmonitor on           ## Turn monitoring on (see 'activity')  ##
+#activity "<%n>"         ## Let you know when stuff happens!     ## 
+
+termcapinfo xterm ti@:te@
+
+startup_message off
+autodetach on
+
+
+bind = resize =
+bind + resize +3
+bind - resize -3
+bind _ resize max
+
+
+nethack on
+
+sessionname gouss
+altscreen on
+
+#hardstatus string '%{= kg}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{=b kR}(%{W}%n*%f %t%?(%u)%?%{=b kR})%{= kw}%?%+Lw%?%?%= %{g}][%{Y}%l%{g}]%{=b C}[ %d %M %c ]%{W}'
+ 
+defscrollback 5000
+
+# Bind Control-PageDown to 'next', Control-PageUp to 'prev'
+# to navigate between windows
+bindkey ^[[5;5~ prev
+bindkey ^[[6;5~ next
+
+# Bind arrow keys Control-Down to 'next', Control-Up to 'prev'
+# to navigate between windows
+# bindkey ^[[1;5A prev
+# bindkey ^[[1;5B next
+
+screen -t SHELL  0
+screen -t EDITOR 1
+split
+focus down
+select 0
+
+resize -12
+
