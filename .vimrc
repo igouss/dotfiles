@@ -13,7 +13,8 @@ set history=50
 " Visual
 syntax on
 "colorscheme delek
-colorscheme black_angus
+"colorscheme black_angus
+set background=light
 set ruler
 set showcmd
 set cmdheight=2

@@ -8,7 +8,7 @@ alias stt="git diff --name-status -r"
 
 alias dfwi="git diff"
 alias dfir="git diff --cached"
-alias dfwt="git diff HEAD"
+alias dfwh="git diff HEAD"
 
 alias add="git add ."
 alias addp="git add --patch"
