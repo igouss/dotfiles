@@ -21,3 +21,6 @@
 	email = i.gouss@gmail.com
 [diff]
     renames = true
+[github]
+	user = igouss
+	token = 4312938bd12001b1b0716d7f28ebfd67

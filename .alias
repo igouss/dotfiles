@@ -6,8 +6,11 @@ alias cii="git commit -v  --interactive"
 alias st="git status -u"
 alias stt="git diff --name-status -r"
 
+# just the changes you’ve made to files beyond what has been marked for commit
 alias dfwi="git diff"
+# just the changes marked for commitjust the changes marked for commit
 alias dfir="git diff --cached"
+# all the changes since the last commit
 alias dfwh="git diff HEAD"
 
 alias add="git add ."
