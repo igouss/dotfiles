@@ -34,16 +34,6 @@ alias conflict="git mergetool --tool=vimdiff"
 #alias bra"git branch -a"
 
 #
-# TODO Script
-#
-alias p='~/bin/todo.py'
-alias pls='~/bin/todo.py ls'
-alias pla='~/bin/todo.py lsa'
-alias pad='~/bin/todo.py add'
-alias prm='~/bin/todo.py rm'
-alias pb='~/bin/todo.py b'
-
-#
 # Misc
 #
 alias vimm="vim +Vexplore"
