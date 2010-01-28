@@ -1,12 +1,16 @@
 #
 # Git section
 #
+
+# stage changes (cached commit)
 alias ci="git commit -a -v -m "
 alias cii="git commit -v  --interactive"
+
+
 alias st="git status -u"
 alias stt="git diff --name-status -r"
 
-# just the changes you’ve made to files beyond what has been marked for commit
+# just the changes you've made to files beyond what has been marked for commit
 alias dfwi="git diff"
 # just the changes marked for commitjust the changes marked for commit
 alias dfir="git diff --cached"
@@ -20,10 +24,22 @@ alias pull="git pull --rebase"
 alias rebase="git rebase -i "
 alias rebaseok="git rebase --continue"
 alias rollback="git reset --hard"
+
+" switch branches
 alias co="git checkout"
+
+" switch branche
+alias co="git checkout"
+
+
+" create branch
+alias co="git checkout"
+
+
 alias clean="git clean -n -d"
 alias clean!="git clean -d"
 alias push="git push"
+alias log="git log --topo-order --decorate --first-parent"
 
 #alias reset="git reset HEAD^"
 alias reset="git reset --hard HEAD^"
@@ -31,6 +47,8 @@ alias giveup="git reset --hard"
 
 alias grm="git ls-files -deleted | xargs git rm"
 alias append="git commit --amend"
+
+alias merge="git merge --no-ff"
 alias conflict="git mergetool --tool=vimdiff"
 
 #alias br="git branch"
