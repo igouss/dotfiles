@@ -35,6 +35,7 @@ alias co="git checkout"
 " create branch
 alias co="git checkout"
 
+alias modified="git ls-files -m"
 
 alias clean="git clean -n -d"
 alias clean!="git clean -d"
