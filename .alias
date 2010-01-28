@@ -2,6 +2,8 @@
 # Git section
 #
 
+alias init="git init && git add . && git commit -m \"initial commit\""
+
 # stage changes (cached commit)
 alias ci="git commit -a -v -m "
 alias cii="git commit -v  --interactive"
@@ -39,8 +41,8 @@ alias co="git checkout"
 
 alias modified="git ls-files -m"
 
-alias clean="git clean -n -d"
-alias clean!="git clean -d"
+alias show-untracked="git clean -n -d"
+alias delete-untracked="git clean -d"
 alias push="git push"
 alias log="git log --topo-order --decorate --first-parent"
 
