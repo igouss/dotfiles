@@ -21,18 +21,20 @@ alias add="git add ."
 alias addp="git add --patch"
 alias push?='git cherry -v origin/master'
 alias pull="git pull --rebase"
+
+# dangerous commands
 alias rebase="git rebase -i "
 alias rebaseok="git rebase --continue"
 alias rollback="git reset --hard"
 
-" switch branches
+# switch branches
 alias co="git checkout"
 
-" switch branche
+# switch branche
 alias co="git checkout"
 
 
-" create branch
+# create branch
 alias co="git checkout"
 
 alias modified="git ls-files -m"
