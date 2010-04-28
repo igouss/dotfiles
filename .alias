@@ -43,7 +43,7 @@ alias modified="git ls-files -m"
 
 alias show-untracked="git clean -n -d"
 alias delete-untracked="git clean -d"
-alias push="git push"
+alias push="git push -v"
 alias log="git log --topo-order --decorate --first-parent"
 
 #alias reset="git reset HEAD^"
