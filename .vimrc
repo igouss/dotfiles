@@ -79,6 +79,12 @@ set shiftwidth=4
 set expandtab
 
 
+" disable arrow keys
+"inoremap <Left>  <NOP>
+"inoremap <Right> <NOP>
+"inoremap <Up>    <NOP>
+"inoremap <Down>  <NOP>
+
 
 "autocmd {event} {path} {ex commands and options}
 "autocmd BufRead,BufNewFile *.java set expandtab
