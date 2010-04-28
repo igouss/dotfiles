@@ -46,5 +46,4 @@ alias
 # Setting PATH for MacPython 2.5
 # The orginal version is saved in .bash_profile.pysave
 export PATH="/Library/Frameworks/Python.framework/Versions/Current/bin:${PATH}"
-export PATH=/opt/git/bin:$PATH
 
