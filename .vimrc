@@ -64,6 +64,13 @@ set foldenable
 set guioptions-=m
 set guioptions-=T
 
+"Clojure
+let clj_highlight_builtins = 1
+let clj_highlight_contrib = 1
+let clj_parent_rainbow = 1
+let clj_want_gorilla = 1
+let vimclojure#NailgunClient = "/Users/elendal/opt/nailgun/ng"
+"
 " File detection and indenting
 filetype on
 filetype plugin indent on

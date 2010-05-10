@@ -27,7 +27,14 @@ alias pull="git pull --rebase"
 # dangerous commands
 alias rebase="git rebase -i "
 alias rebaseok="git rebase --continue"
+
+# return the entire working tree to the last committed state with
 alias rollback="git reset --hard"
+
+# revert to index (arg:File)
+alias revi="git checkout --"
+# revert to head (arg:File)
+alias revh="git checkout HEAD"
 
 # switch branches
 alias co="git checkout"
@@ -66,6 +73,7 @@ alias vimm="vim +Vexplore"
 alias netstat="netstat -nal -p tcp && netstat -nal -p udp"
 alias ..='cd ..'
 alias =clear
+alias clj="~/opt/ClojureX/clj"
 #alias top="top -o cpu -S"
 
 
