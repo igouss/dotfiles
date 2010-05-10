@@ -42,7 +42,8 @@ alias co="git checkout"
 # switch branche
 alias co="git checkout"
 
-
+# Show last commit
+alias last="git cat-file commit HEAD"
 # create branch
 alias co="git checkout"
 
