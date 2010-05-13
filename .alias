@@ -26,7 +26,7 @@ alias pull="git pull --rebase"
 
 # dangerous commands
 alias rebase="git rebase -i "
-alias rebaseok="git rebase --continue"
+alias resolved="git rebase --continue"
 
 # return the entire working tree to the last committed state with
 alias rollback="git reset --hard"
