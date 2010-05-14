@@ -52,7 +52,12 @@ alias modified="git ls-files -m"
 alias show-untracked="git clean -n -d"
 alias delete-untracked="git clean -d"
 alias push="git push -v"
-alias log="git log --topo-order --decorate --first-parent"
+
+#Log with visual tree
+alias log="git log --topo-order --decorate --graph --oneline --all"
+
+#Flat log
+alias logf="git log --topo-order --decorate --first-parent --oneline --all"
 
 #alias reset="git reset HEAD^"
 alias reset="git reset --hard HEAD^"
