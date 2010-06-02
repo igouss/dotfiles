@@ -4,7 +4,7 @@ function gitExecute {
     select REMOTEREPO in `git remote`; do echo $opt; break; done
     select BRANCH in `git branch | cut -c3- | paste -s -`; do break; done
     `eval ${1}`
-    unset COMMAND REMOTEREPO BRANCH
+    unset REMOTEREPO BRANCH
 }
 
 function pull {
