@@ -91,13 +91,4 @@ then
     alias mysqlctl='sudo /opt/local/share/mysql5/mysql/mysql.server'
 fi
 
-# create an empty branch see http://gitcasts.com/posts/empty-branches
-function git_empty_branch
-{
-git-symbolic-ref HEAD refs/heads/$1
-rm .git/index
-git clean -fdx
-git commit --allow-empty -m "initial branch commit"
-}
-
 alias geb="git_empty_branch" 
