@@ -2,6 +2,7 @@
 # Git section
 #
 
+# Show usefull git commands minus private functions
 function gits {
     echo "init    - create git repo in current directory add and commit all files in it"
     echo "push     - push current branch to remote repo"
