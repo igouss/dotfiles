@@ -105,7 +105,7 @@ shopt -s histappend
 
 #export PS1=">"
 export PS1='[\W$(__git_ps1 " (%s)")]\$ '
-export PATH=$HOME/bin:/opt/local/bin:/opt/local/sbin:$PATH
+export PATH=~/opt/git/bin/:$HOME/bin:/opt/local/bin:/opt/local/sbin:$PATH
 
 export CLICOLOR=1
 export JAVA_HOME=/Library/Java/Home
