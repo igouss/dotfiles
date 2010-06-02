@@ -31,3 +31,15 @@ function push {
     ${COMMAND}
 }
 
+function delrem {
+    select opt in `git remote`; do echo $opt; break; done
+    REMOTEREPO=${opt}
+
+    select opt in `git branch | cut -c3- | paste -s -`; do break; done
+    BRANCH=${opt}
+
+    COMMAND="git push ${REMOTEREPO} :heads/${BRANCH}"
+    echo ${COMMAND}
+    ${COMMAND}
+}
+
