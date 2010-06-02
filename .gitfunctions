@@ -13,20 +13,20 @@ function merge_to {
 function gitExecute {
     select REMOTEREPO in `git remote`; do echo $opt; break; done
     select BRANCH in `git branch | cut -c3- | paste -s -`; do break; done
-    `eval ${1}`
+    eval ${1}
     unset REMOTEREPO BRANCH
 }
 
 function pull {
-    gitExecute 'echo git pull -v --stat --rebase ${REMOTEREPO} ${BRANCH}'
+    gitExecute 'git pull -v --stat --rebase ${REMOTEREPO} ${BRANCH}'
 }
 
 function push {
-    gitExecute 'echo git push -v ${REMOTEREPO} ${BRANCH}'
+    gitExecute 'git push -v ${REMOTEREPO} ${BRANCH}'
 }
 
 function delrem {
-    gitExecute 'echo git push ${REMOTEREPO} :heads/${BRANCH}'
+    gitExecute 'git push ${REMOTEREPO} :heads/${BRANCH}'
 }
 
 function delloc {
@@ -42,5 +42,10 @@ function git_empty_branch
     rm .git/index
     git clean -fdx
     git commit --allow-empty -m "initial branch commit"
+}
+
+function merge
+{
+    gitExecute 'git pull ${REMOTEREPO} ${BRANCH} && git merge --no-ff ${BRANCH}'
 }
 

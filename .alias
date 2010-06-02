@@ -8,6 +8,7 @@ function gits {
     echo "pull     - pull from remote repo"
     echo "ci       - commit files stages in index to repository"
     echo "merge_to - merge current branch to (arg)"
+    echo "merge    - merge with remote branch"
     echo "cii      - commit interactively"
     echo "st       - git status of uncommited, changed and stages files"
     echo "stt      - Show only names and status of changed files"
@@ -33,7 +34,6 @@ function gits {
     echo "giveup   -"
     echo "grm      -"
 #    echo "append   - add to last unpushed commit"
-    echo "merge    -"
     echo "conflict -"
     echo "geb      -"
 }
@@ -94,7 +94,7 @@ alias giveup="git reset --hard"
 alias grm="git ls-files -deleted | xargs git rm"
 #alias append="git commit --amend"
 
-alias merge="git merge --no-ff"
+#alias merge="git merge --no-ff"
 alias conflict="git mergetool --tool=vimdiff"
 
 #alias br="git branch"
