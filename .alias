@@ -2,6 +2,41 @@
 # Git section
 #
 
+function gits {
+    echo "init    - create git repo in current directory add and commit all files in it"
+    echo "push     - push current branch to remote repo"
+    echo "pull     - pull from remote repo"
+    echo "ci       - commit files stages in index to repository"
+    echo "cii      - commit interactively"
+    echo "st       - git status of uncommited, changed and stages files"
+    echo "stt      - Show only names and status of changed files"
+    echo "dfwi     - diff working dir and index"
+    echo "dfir     - diff index and HEAD"
+    echo "dfwh     - diff working dir and HEAD"
+    echo "add      - add all files to index"
+    echo "addp     - select what to add to index"
+    echo "push?    - selectively push what to commit"
+    echo "rebase   - interactive rebase"
+    echo "resolve  - continue after finished resolving the conflict manually"
+    echo "rollback - return the entire working tree to the last committed state with"
+    echo "revi     - revert to index (arg:File)"
+    echo "revh     - revert to head (arg:File)"
+    echo "co       - checkout branch"
+    echo "last     - show last commit"
+    echo "modified - show modified files"
+    echo "show-untracked"
+    echo "delete-untracked"
+    echo "log      - log with visual tree"
+    echo "logf     - flat log"
+    echo "reset    -"
+    echo "giveup   -"
+    echo "grm      -"
+    echo "ammend   - add to last unpushed commit"
+    echo "merge    -"
+    echo "conflict -"
+    echo "geb      -"
+}
+
 alias init="git init && git add . && git commit -m \"initial commit\""
 
 # stage changes (cached commit)
@@ -14,7 +49,7 @@ alias stt="git diff --name-status -r"
 
 # just the changes you've made to files beyond what has been marked for commit
 alias dfwi="git diff"
-# just the changes marked for commitjust the changes marked for commit
+# just the changes marked for commit
 alias dfir="git diff --cached"
 # all the changes since the last commit
 alias dfwh="git diff HEAD"
@@ -22,10 +57,6 @@ alias dfwh="git diff HEAD"
 alias add="git add ."
 alias addp="git add --patch"
 alias push?='git cherry -v origin/master'
-
-# replaced with functions in .gitignore
-# alias pull="git pull --rebase"
-# alias push="git push -v"
 
 # dangerous commands
 alias rebase="git rebase -i "
@@ -42,13 +73,8 @@ alias revh="git checkout HEAD"
 # switch branches
 alias co="git checkout"
 
-# switch branche
-alias co="git checkout"
-
 # Show last commit
 alias last="git cat-file commit HEAD"
-# create branch
-alias co="git checkout"
 
 alias modified="git ls-files -m"
 
@@ -61,7 +87,6 @@ alias log="git log --topo-order --decorate --graph --oneline --all"
 #Flat log
 alias logf="git log --topo-order --decorate --first-parent --oneline --all"
 
-#alias reset="git reset HEAD^"
 alias reset="git reset --hard HEAD^"
 alias giveup="git reset --hard"
 
