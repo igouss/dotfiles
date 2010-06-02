@@ -1,5 +1,15 @@
 #!/bin/bash
 
+function current_branch { 
+    ref=$(git symbolic-ref HEAD 2> /dev/null)
+    echo ${ref#refs/heads/} 
+}
+
+function merge_to { 
+    branch=`eval current_branch`
+    git checkout "${@}" && git merge ${branch}
+}
+
 function gitExecute {
     select REMOTEREPO in `git remote`; do echo $opt; break; done
     select BRANCH in `git branch | cut -c3- | paste -s -`; do break; done
