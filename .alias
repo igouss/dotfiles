@@ -20,7 +20,8 @@ function gits {
     echo "push?    - selectively push what to commit"
     echo "rebase   - interactive rebase"
     echo "resolve  - continue after finished resolving the conflict manually"
-    echo "rollback - return the entire working tree to the last committed state with"
+    echo "rollhard - return the entire working tree to the last committed state"
+    echo "rollsoft - revert the commit, put the committed changes back into index"
     echo "revi     - revert to index (arg:File)"
     echo "revh     - revert to head (arg:File)"
     echo "co       - checkout branch"
@@ -31,7 +32,6 @@ function gits {
     echo "log      - log with visual tree"
     echo "logf     - flat log"
     echo "reset    -"
-    echo "giveup   -"
     echo "grm      -"
 #    echo "append   - add to last unpushed commit"
     echo "conflict -"
@@ -63,9 +63,6 @@ alias push?='git cherry -v origin/master'
 alias rebase="git rebase -i "
 alias resolved="git rebase --continue"
 
-# return the entire working tree to the last committed state with
-alias rollback="git reset --hard"
-
 # revert to index (arg:File)
 alias revi="git checkout --"
 # revert to head (arg:File)
@@ -89,7 +86,11 @@ alias log="git log --topo-order --decorate --graph --oneline --all"
 alias logf="git log --topo-order --decorate --first-parent --oneline --all"
 
 alias reset="git reset --hard HEAD^"
-alias giveup="git reset --hard"
+
+# return the entire working tree to the last committed state
+alias rollhard="git reset --hard"
+# revert the commit, put the committed changes back into index
+alias rollsoft="git reset --soft HEAD^"
 
 alias grm="git ls-files -deleted | xargs git rm"
 #alias append="git commit --amend"
