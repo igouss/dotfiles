@@ -22,7 +22,10 @@ alias dfwh="git diff HEAD"
 alias add="git add ."
 alias addp="git add --patch"
 alias push?='git cherry -v origin/master'
-alias pull="git pull --rebase"
+
+# replaced with functions in .gitignore
+# alias pull="git pull --rebase"
+# alias push="git push -v"
 
 # dangerous commands
 alias rebase="git rebase -i "
@@ -51,7 +54,6 @@ alias modified="git ls-files -m"
 
 alias show-untracked="git clean -n -d"
 alias delete-untracked="git clean -d"
-alias push="git push -v"
 
 #Log with visual tree
 alias log="git log --topo-order --decorate --graph --oneline --all"

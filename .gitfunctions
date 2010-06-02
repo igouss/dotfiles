@@ -1,0 +1,33 @@
+#!/bin/bash
+
+function selectFrom {
+  select selected in ${1};
+  do
+      break
+  done
+}
+
+function pull {
+    select opt in `git remote`; do echo $opt; break; done
+    PULLFROM=${opt}
+
+    select opt in `cut -c 42- <.git/info/refs | paste -s -`; do break; done
+    BRANCH=${opt}
+
+    COMMAND="git pull -v --stat --rebase ${PULLFROM} ${BRANCH}"
+    echo ${COMMAND}
+    ${COMMAND}
+}
+
+function push {
+    select opt in `git remote`; do echo $opt; break; done
+    PULLFROM=${opt}
+
+    select opt in `cut -c 42- <.git/info/refs | paste -s -`; do break; done
+    BRANCH=${opt}
+
+    COMMAND="git push -v ${PULLFROM} ${BRANCH}"
+    echo ${COMMAND}
+    ${COMMAND}
+}
+

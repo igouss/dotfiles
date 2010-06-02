@@ -1,6 +1,7 @@
 source ~/.bash_completion.d/git-completion.sh
 source ~/.bash_completion.d/todo_completer.sh
 source ~/.alias
+source ~/.gitfunctions
 # append to the history file, don't overwrite it
 shopt -s histappend
 
