@@ -1,45 +1,21 @@
 #!/bin/bash
 
-function selectFrom {
-  select selected in ${1};
-  do
-      break
-  done
+function gitExecute {
+    select REMOTEREPO in `git remote`; do echo $opt; break; done
+    select BRANCH in `git branch | cut -c3- | paste -s -`; do break; done
+    eval ${1}
+    unset REMOTEREPO BRANCH
 }
 
 function pull {
-    select opt in `git remote`; do echo $opt; break; done
-    PULLFROM=${opt}
-
-    select opt in `git branch -a | cut -c3- | paste -s -`; do break; done
-    BRANCH=${opt}
-
-    COMMAND="git pull -v --stat --rebase ${PULLFROM} ${BRANCH}"
-    echo ${COMMAND}
-    ${COMMAND}
+    gitExecute 'echo git pull -v --stat --rebase ${REMOTEREPO} ${BRANCH}'
 }
 
 function push {
-    select opt in `git remote`; do echo $opt; break; done
-    PULLFROM=${opt}
-
-    select opt in `git branch -a | cut -c3- | paste -s -`; do break; done
-    BRANCH=${opt}
-
-    COMMAND="git push -v ${PULLFROM} ${BRANCH}"
-    echo ${COMMAND}
-    ${COMMAND}
+    gitExecute 'echo git push -v ${REMOTEREPO} ${BRANCH}'
 }
 
 function delrem {
-    select opt in `git remote`; do echo $opt; break; done
-    REMOTEREPO=${opt}
-
-    select opt in `git branch | cut -c3- | paste -s -`; do break; done
-    BRANCH=${opt}
-
-    COMMAND="git push ${REMOTEREPO} :heads/${BRANCH}"
-    echo ${COMMAND}
-    ${COMMAND}
+    gitExecute 'echo git push ${REMOTEREPO} :heads/${BRANCH}'
 }
 
