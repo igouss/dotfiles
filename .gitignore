@@ -13,6 +13,7 @@
 !bin/
 !.bash_completion.d/
 !pager
+!.inputrc
 .DS_Store
 pkg
 coverage
