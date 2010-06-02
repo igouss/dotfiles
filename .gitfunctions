@@ -19,3 +19,9 @@ function delrem {
     gitExecute 'echo git push ${REMOTEREPO} :heads/${BRANCH}'
 }
 
+function delloc {
+    select BRANCH in `git branch | cut -c3- | paste -s -`; do break; done
+    git branch -D ${BRANCH}
+    unset BRANCH
+}
+
