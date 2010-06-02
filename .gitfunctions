@@ -11,7 +11,7 @@ function pull {
     select opt in `git remote`; do echo $opt; break; done
     PULLFROM=${opt}
 
-    select opt in `cut -c 42- <.git/info/refs | paste -s -`; do break; done
+    select opt in `git branch -a | cut -c3- | paste -s -`; do break; done
     BRANCH=${opt}
 
     COMMAND="git pull -v --stat --rebase ${PULLFROM} ${BRANCH}"
@@ -23,7 +23,7 @@ function push {
     select opt in `git remote`; do echo $opt; break; done
     PULLFROM=${opt}
 
-    select opt in `cut -c 42- <.git/info/refs | paste -s -`; do break; done
+    select opt in `git branch -a | cut -c3- | paste -s -`; do break; done
     BRANCH=${opt}
 
     COMMAND="git push -v ${PULLFROM} ${BRANCH}"
