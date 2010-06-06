@@ -79,19 +79,6 @@ alias modified="git ls-files -m"
 alias show-untracked="git clean -n -d"
 alias delete-untracked="git clean -d"
 
-#Log with visual tree
-alias log="git log --topo-order --decorate --graph --oneline --all"
-
-#Flat log
-alias logf="git log --topo-order --decorate --first-parent --oneline --all"
-
-
-# return the entire working tree to the last committed state
-alias rollhard="git reset --hard"
-# revert the commit, put the committed changes back into index
-alias rollsoft="git reset --soft HEAD^"
-alias reset="git reset --hard HEAD^"
-
 alias grm="git ls-files -deleted | xargs git rm"
 #alias append="git commit --amend"
 

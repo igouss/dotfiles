@@ -1,9 +1,31 @@
 #!/bin/bash
 
+#Log with visual tree
+function log {
+    git log --topo-order --decorate --graph --oneline --all
+}
+
+# flat log
+function logf {
+  git log --topo-order --decorate --first-parent --oneline --all
+}
+
 # Display Current branch
 function current_branch { 
     ref=$(git symbolic-ref HEAD 2> /dev/null)
     echo ${ref#refs/heads/} 
+}
+
+function rollsoft {
+    log
+    read -e -p "Enter rev: " rev
+    git reset --soft ${rev}
+}
+ 
+function rollhard {
+    log
+    read -e -p "Enter rev: " rev
+    git reset --hard ${rev}
 }
 
 # marge current branch to another
