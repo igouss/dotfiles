@@ -34,7 +34,7 @@ function gitRemote {
 }
 
 function gitBranch {
-    select BRANCH in `git branch | cut -c3- | paste -s -`; do break; done
+    select BRANCH in `git branch -a | cut -c3- | paste -s -`; do break; done
 }
 
 
@@ -47,10 +47,18 @@ function merge_to {
 # execute git command with REMOTEREPO BRANCH substituted in arg0
 function gitExecuteRH {
     select REMOTEREPO in `git remote`; do echo $opt; break; done
-    select BRANCH in `git branch | cut -c3- | paste -s -`; do break; done
+    select BRANCH in `git branch -a | cut -c3- | paste -s -`; do break; done
     eval ${1}
     unset REMOTEREPO BRANCH
 }
+
+# execute git command with BRANCH substituted in arg0
+function gitExecuteB {
+    select BRANCH in `git branch -a | cut -c3- | paste -s -`; do break; done
+    eval ${1}
+    unset BRANCH
+}
+
 
 # execute git command with REMOTEREPO substituted in arg0
 function gitExecuteR {
@@ -105,4 +113,7 @@ function merge
 function fetch {
    gitExecuteR 'git fetch -v -u ${REMOTEREPO}'
 }
- 
+
+function merge {
+    gitExecuteB 'git merge --no-ff ${BRANCH}'
+}

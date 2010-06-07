@@ -82,7 +82,6 @@ alias delete-untracked="git clean -d"
 alias grm="git ls-files -deleted | xargs git rm"
 #alias append="git commit --amend"
 
-#alias merge="git merge --no-ff"
 alias conflict="git mergetool --tool=vimdiff"
 
 #
