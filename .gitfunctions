@@ -18,6 +18,7 @@ function current_branch {
     echo ${ref#refs/heads/} 
 }
 
+
 function rollsoft {
     log
     read -e -p "Enter rev: " rev
@@ -117,4 +118,9 @@ function fetch {
 
 function merge {
     gitExecuteB 'git merge --no-ff ${BRANCH}'
+}
+
+
+function dfwh {
+    gitExecuteR 'git diff ${BRANCH}..head'
 }
