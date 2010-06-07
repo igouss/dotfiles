@@ -3,7 +3,8 @@
 
 #Log with visual tree
 function log {
-    git log --topo-order --decorate --graph --oneline --all
+    #git log --topo-order --decorate --graph --oneline --all
+    git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 }
 
 # flat log
