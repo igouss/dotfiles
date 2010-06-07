@@ -68,9 +68,9 @@ function gitExecuteR {
     unset REMOTEREPO
 }
 
-function pull {
-    gitExecuteRH 'git pull -v --stat --rebase ${REMOTEREPO} ${BRANCH}'
-}
+#function pull {
+#    gitExecuteRH 'git pull -v --stat --rebase ${REMOTEREPO} ${BRANCH}'
+#}
 
 # first do dry run
 # then ask for source and for target branch name
