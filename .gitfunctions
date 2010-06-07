@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 #Log with visual tree
 function log {
     git log --topo-order --decorate --graph --oneline --all
@@ -28,6 +29,15 @@ function rollhard {
     git reset --hard ${rev}
 }
 
+function gitRemote {
+    select REMOTEREPO in `git remote`; do echo $opt; break; done
+}
+
+function gitBranch {
+    select BRANCH in `git branch | cut -c3- | paste -s -`; do break; done
+}
+
+
 # marge current branch to another
 function merge_to { 
     branch=`eval current_branch`
@@ -35,23 +45,40 @@ function merge_to {
 }
 
 # execute git command with REMOTEREPO BRANCH substituted in arg0
-function gitExecute {
+function gitExecuteRH {
     select REMOTEREPO in `git remote`; do echo $opt; break; done
     select BRANCH in `git branch | cut -c3- | paste -s -`; do break; done
     eval ${1}
     unset REMOTEREPO BRANCH
 }
 
-function pull {
-    gitExecute 'git pull -v --stat --rebase ${REMOTEREPO} ${BRANCH}'
+# execute git command with REMOTEREPO substituted in arg0
+function gitExecuteR {
+    select REMOTEREPO in `git remote`; do echo $opt; break; done
+    eval ${1}
+    unset REMOTEREPO
 }
 
+function pull {
+    gitExecuteRH 'git pull -v --stat --rebase ${REMOTEREPO} ${BRANCH}'
+}
+
+# first do dry run
+# then ask for source and for target branch name
 function push {
-    gitExecute 'git push -v ${REMOTEREPO} ${BRANCH}'
+    gitRemote
+    gitBranch
+    read -e -p "remote brunch name: " remoteBrunch
+    if [ -z "${remoteBrunch}" ]
+    then
+        remoteBrunch=${BRANCH}
+    fi
+    git push --dry-run ${REMOTEREPO} ${BRANCH}:${remoteBrunch}
+    unset ${REMOTEREPO} ${BRANCH} ${remoteBrunch}
 }
 
 function delrem {
-    gitExecute 'git push ${REMOTEREPO} :heads/${BRANCH}'
+    gitExecuteRH 'git push ${REMOTEREPO} :heads/${BRANCH}'
 }
 
 function delloc {
@@ -71,6 +98,11 @@ function git_empty_branch
 
 function merge
 {
-    gitExecute 'git pull ${REMOTEREPO} ${BRANCH} && git merge --no-ff ${BRANCH}'
+    gitExecuteRH 'git pull ${REMOTEREPO} ${BRANCH} && git merge --no-ff ${BRANCH}'
 }
 
+# download remote
+function fetch {
+   gitExecuteR 'git fetch -v -u ${REMOTEREPO}'
+}
+ 
