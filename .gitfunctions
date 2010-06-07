@@ -75,8 +75,8 @@ function gitExecuteR {
 # first do dry run
 # then ask for source and for target branch name
 function push {
-    gitRemote
-    gitBranch
+    select REMOTEREPO in `git remote`; do echo $opt; break; done
+    select BRANCH in `git branch | cut -c3- | paste -s -`; do break; done
     read -e -p "remote brunch name: " remoteBrunch
     if [ -z "${remoteBrunch}" ]
     then
