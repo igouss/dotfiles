@@ -83,7 +83,7 @@ function push {
     then
         remoteBrunch=${BRANCH}
     fi
-    git push --dry-run ${REMOTEREPO} ${BRANCH}:${remoteBrunch}
+    git push ${REMOTEREPO} ${BRANCH}:${remoteBrunch}
     unset ${REMOTEREPO} ${BRANCH} ${remoteBrunch}
 }
 
@@ -106,21 +106,27 @@ function git_empty_branch
     git commit --allow-empty -m "initial branch commit"
 }
 
-function merge
-{
-    gitExecuteRH 'git pull ${REMOTEREPO} ${BRANCH} && git merge --no-ff ${BRANCH}'
-}
-
 # download remote
 function fetch {
    gitExecuteR 'git fetch -v -u ${REMOTEREPO}'
 }
 
 function merge {
-    gitExecuteB 'git merge --no-ff ${BRANCH}'
+    gitExecuteB 'git merge ${BRANCH}'
+}
+
+# deff between branch and head
+function dfwh {
+    gitExecuteR 'git diff ${BRANCH}..head'
+}
+
+# remove all files or specified file from git index
+function unstage {
+  git reset HEAD $1
 }
 
 
-function dfwh {
-    gitExecuteR 'git diff ${BRANCH}..head'
+# discard changed all changes or specified file but making working directory same as head
+function discard {
+  git checkout -- $1
 }
