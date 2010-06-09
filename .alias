@@ -2,50 +2,7 @@
 # Git section
 #
 
-# Show usefull git commands minus private functions
-function gits {
-    echo "init    - create git repo in current directory add and commit all files in it"
-    echo "push     - push current branch to remote repo"
-    echo "pull     - pull from remote repo"
-    echo "ci       - commit files stages in index to repository"
-    echo "merge_to - merge current branch to (arg)"
-    echo "merge    - merge with remote branch"
-    echo "cii      - commit interactively"
-    echo "st       - git status of uncommited, changed and stages files"
-    echo "stt      - Show only names and status of changed files"
-    echo "dfwi     - diff working dir and index"
-    echo "dfir     - diff index and HEAD"
-    echo "dfwh     - diff working dir and HEAD"
-    echo "add      - add all files to index"
-    echo "addp     - select what to add to index"
-    echo "push?    - selectively push what to commit"
-    echo "rebase   - interactive rebase"
-    echo "resolve  - continue after finished resolving the conflict manually"
-    echo "rollhard - return the entire working tree to the last committed state"
-    echo "rollsoft - revert the commit, put the committed changes back into index"
-    echo "revi     - revert to index (arg:File)"
-    echo "revh     - revert to head (arg:File)"
-    echo "co       - checkout branch"
-    echo "last     - show last commit"
-    echo "modified - show modified files"
-    echo "show-untracked"
-    echo "delete-untracked"
-    echo "log      - log with visual tree"
-    echo "logf     - flat log"
-    echo "reset    -"
-    echo "grm      -"
-#    echo "append   - add to last unpushed commit"
-    echo "conflict -"
-    echo "geb      -"
-}
-
 alias init="git init && git add . && git commit -m \"initial commit\""
-
-# switch branches
-alias co="git checkout"
-
-alias st="git status -u"
-alias stt="git diff --name-status -r"
 
 # just the changes you've made to files beyond what has been marked for commit
 alias dfwi="git diff"
