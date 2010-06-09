@@ -130,3 +130,13 @@ function unstage {
 function discard {
   git checkout -- $1
 }
+
+
+function ci {
+# stage changes (cached commit)
+  git commit -a -v --edit -m $1
+}
+
+function cii {
+  git commit -v  --interactive
+}

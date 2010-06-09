@@ -41,10 +41,6 @@ function gits {
 
 alias init="git init && git add . && git commit -m \"initial commit\""
 
-# stage changes (cached commit)
-alias ci="git commit -a -v -m "
-alias cii="git commit -v  --interactive"
-
 # switch branches
 alias co="git checkout"
 
