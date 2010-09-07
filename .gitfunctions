@@ -24,6 +24,7 @@ function gits {
     echo "revi     - revert to index (arg:File)"
     echo "revh     - revert to head (arg:File)"
     echo "co       - checkout branch"
+    echo "unadd      - removes file fron index"
     echo "last     - show last commit"
     echo "modified - show modified files"
     echo "show-untracked"
@@ -47,6 +48,11 @@ function st {
   git status -u
 }
 
+
+#remove file from index
+function unadd {
+  git rm --cached $1
+}
 #Show only names and status of changed files
 function stt {
   git diff --name-status -r
