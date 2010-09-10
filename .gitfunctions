@@ -38,6 +38,15 @@ function gits {
     echo "geb      -"
 }
 
+
+function uncommit {
+  git reset --soft HEAD^
+}
+
+function recommit {
+  git commit -c ORIG_HEAD
+}
+
 # switch branches
 function co {
   git checkout $1
@@ -191,7 +200,9 @@ function discard {
 
 function ci {
 # stage changes (cached commit)
-  git commit -a -v --edit -m "$1"
+#  git commit -a -v --edit -m "$1"
+  git commit -v --edit -m "$1"
+
 }
 
 function cii {
