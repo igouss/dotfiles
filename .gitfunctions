@@ -39,6 +39,9 @@ function gits {
 }
 
 
+function rmdeleted {
+  git rm $(git ls-files -d)
+}
 function uncommit {
   git reset --soft HEAD^
 }
