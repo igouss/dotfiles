@@ -19,6 +19,8 @@ export GREP_COLOR="32"
 export GREP_OPTIONS="--color=auto"
 export EDITOR=vim
 export HISTCONTROL=ignoredups
+export HISTFILESIZE=1000000000
+export HISTSIZE=1000000
 # see http://www.macosxhints.com/article.php?story=20031025162727485
 export CLICOLOR=1
 #export LSCOLORS=gxfxcxdxbxegedabagacad
